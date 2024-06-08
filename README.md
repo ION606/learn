@@ -1,9 +1,9 @@
 # Welcome to my notes!
 Feel free to browse for anything you like!  
 
-if you have any topics you'd like me to cover, please open an issue with the `new` tag  
+if you have any topics you'd like me to cover, please open an issue with the https://github.com/ION606/learn/labels/documentation tag  
 
-if you find an error, please open an issue with the `error` tag
+if you find an error, please open an issue with the https://github.com/ION606/learn/labels/bug tag
 
 
 # Notes
