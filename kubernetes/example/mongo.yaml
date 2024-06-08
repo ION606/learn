@@ -1,0 +1,47 @@
+# deployement and service for mongodb
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mgongo-deployment
+  labels:
+    app: mgongo
+spec: # deployement-specific
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mgongo
+  template: # deployement for the pods
+    metadata:
+      labels:
+        app: mgongo
+    spec:
+      containers: # https://hub.docker.com/_/mongo
+      - name: mongodb
+        image: mongo:5.0
+        ports:
+        - containerPort: 27017
+        env:  # sameple values for the demo webserver
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom: 
+            secretKeyRef:  # get from secrets
+              name: mongo-secret
+              key: mongo-user      
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom: 
+            secretKeyRef:  # get from secrets
+              name: mongo-secret
+              key: mongo-password
+--- # "new file"
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service
+spec:
+  selector:
+    app: mongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

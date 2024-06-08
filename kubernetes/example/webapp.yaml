@@ -1,0 +1,54 @@
+# deployement and service for mongodb
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  labels:
+    app: webapp
+spec: # deployement-specific
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template: # deployement for the pods
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers: # https://hub.docker.com/_/mongo
+      - name: webapp
+        image: nanajanashia/k8s-demo-app:v1.0  # demo web app
+        ports:
+        - containerPort: 3000
+        env: #add demo information
+        - name: USER_NAME
+          valueFrom: 
+            secretKeyRef:  # get from secrets
+              name: mongo-secret
+              key: mongo-user
+        - name: USER_PWD
+          valueFrom: 
+            secretKeyRef:  # get from secrets
+              name: mongo-secret
+              key: mongo-password
+        - name: DB_URL
+          valueFrom: 
+            configMapKeyRef:  # get from configMap
+              name: mongo-config
+              key: mongo-url
+--- # "new file"
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  type: NodePort # external service port type
+  selector:
+    app: webapp
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30100 # see https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport for ranges

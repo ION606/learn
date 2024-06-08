@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ION Knowledge Base</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .folder {
+            margin: 10px 0;
+        }
+
+        .folder>div {
+            cursor: pointer;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .folder-content {
+            display: none;
+            margin-left: 20px;
+        }
+
+        .folder-content a {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
+    <script>
+        function toggleFolderContent(event) {
+            const contentDiv = event.currentTarget.nextElementSibling;
+            contentDiv.style.display = contentDiv.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Index</h1>
+    <div id="folders">
+        <!-- Folder entries will be inserted here -->
+    </div>
+    <script>
+        const folders = [
+            'AI and Blockchain',
+            'Computer Organization',
+            'Computer Science I',
+            'Data Structures',
+            'docker',
+            'Foundations from Computer Science',
+            'Introduction to Algorithms',
+            'kubernetes',
+            'Machine Learning from Data',
+            'Operating Systems',
+            'Programming Languages'
+        ];
+
+        const foldersContainer = document.getElementById('folders');
+
+        folders.forEach(folder => {
+            const folderDiv = document.createElement('div');
+            folderDiv.className = 'folder';
+            folderDiv.innerHTML = `
+                <div onclick="toggleFolderContent(event)">${folder}</div>
+                <div class="folder-content">
+                    <!-- Links to files in ${folder} will be inserted here -->
+                </div>
+            `;
+            foldersContainer.appendChild(folderDiv);
+
+            fetch(`${folder}`)
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const links = doc.querySelectorAll('a');
+                    const contentDiv = folderDiv.querySelector('.folder-content');
+                    links.forEach(link => {
+                        const linkElement = document.createElement('a');
+                        linkElement.href = `${folder}/${link.getAttribute('href')}`;
+                        linkElement.textContent = link.textContent;
+                        contentDiv.appendChild(linkElement);
+                    });
+                });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+services:
+    web:
+        build: .
+        ports:
+            - "3000:3000"
+    db:
+        image: "mysql"
+        environment:
+            # env vars here
+            ROOT_PASS: password
+        volumes:
+            - db-data:/foo
+
+volumes:
+    db-data:
