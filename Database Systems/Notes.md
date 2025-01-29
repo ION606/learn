@@ -14,7 +14,7 @@ my server crashed towards the end of the year, so most of the images are gone. I
 
 - Database Management Systems (DBMS) - a software tool for storing/managing large amounts of data
 - Database Server - a specific installation of a DBMS
-- Database - a collection of data (often in a DBMS) organized for a specific application (also see [Database Section](https://cloud.ion606.com/apps/files/files#h-databases))
+- Database - a collection of data (often in a DBMS) organized for a specific application (also see [Database Section](https://github.com/ION606/learn/blob/main/Database%20Systems/Notes.md#databases))
 - Database Application - a software product that uses DBMSs to store one or more databases for a specific purpose
 - Database Schema 
   - what types of data are valid to store
@@ -31,8 +31,8 @@ my server crashed towards the end of the year, so most of the images are gone. I
   - rules about the data (Database Schema)
   - design so that you hopefully never have to make changes, cause making changes later on is difficult
 - Transaction - a program that changes data or a sequence of database operations that satisfies the ACID properties (which can be perceived as a single logical operation on the data)
-- ACID - see [ACID Section](https://cloud.ion606.com/apps/files/files/34361?dir=/School/Senior%20Year/Datbase%20Systems&openfile=true#h-a-c-i-d)
-- Relational Data Model - see [Relational Data Model](https://cloud.ion606.com/apps/files/files/34361?dir=/School/Senior%20Year/Datbase%20Systems&openfile=true#h-relational-data-model) section
+- ACID - see [ACID Section](https://github.com/ION606/learn/blob/main/Database%20Systems/Notes.md#boyce-codd-normal-form-bcnf)
+- Relational Data Model - see [Relational Data Model](https://github.com/ION606/learn/blob/main/Database%20Systems/Notes.md#relational-data-model) section
 - Key - some attribute that determines other keys, you can have multiple keys
 - minimal key - the minimum set of attributes needed to get the correct info
 - super key - any superset containing the minimal key (any superset of the minimal key)
@@ -46,8 +46,8 @@ my server crashed towards the end of the year, so most of the images are gone. I
   - Database Schema + Database Instance + Application Logic
   - Relational Data Model
   - set of relations
-- BCNF - see [BCNF](https://cloud.ion606.com/apps/files/files/34361?dir=/School/Senior%20Year/Datbase%20Systems&openfile=true#h-boyce-codd-normal-form-bcnf) section
-- Entity-Relationship Models - See [ER](https://cloud.ion606.com/apps/files/files/34361?dir=/School/Senior%20Year/Datbase%20Systems&openfile=true#h-entity-relationship-models-er) section
+- BCNF - see [BCNF](https://github.com/ION606/learn/blob/main/Database%20Systems/Notes.md#boyce-codd-normal-form-bcnf) section
+- Entity-Relationship Models - See [ER](https://github.com/ION606/learn/blob/main/Database%20Systems/Notes.md#entity-relationship-er-models) section
 
 ### What Makes a DBMS
 
@@ -4084,8 +4084,7 @@ EXAMPLE:
 ## Query Processing
 - SQL queries are converted to bag relational algebra queries to be implemented
 Overall picture of the DBMS system components
-![[Pasted image 20241201144514.png]]
-MOVE TO NEXTCLOUD????
+
 
 #### Disk Access Process (Overly Simplified)
 - to process any data, it must first be brought to memory
